@@ -1,0 +1,45 @@
+一天蒜头君猜想，是不是所有的偶数（除了 22），都可以用两个质数相加得到呢？于是聪明的蒜头君就找你来验证了。
+#include<stdio.h>
+int sqrt(int n){
+    for(int i = 1; i<n;i++)
+        if(i*i >= n) return i;
+}
+int isPrime(int n){
+    if(n==2) return 1;
+    if(n%2 == 0) return 0;
+    int i;
+    int max = sqrt(n);
+    for(i = 3; i<= max; i += 2){
+        if(n%2 == 0) return 0;
+    }
+    return 1;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    int i, j, x;
+    for(i = 0; i<t; i++){
+        scanf("%d",&x);
+        if(isPrime(x-2)==1) printf("%d %d",2,x-2);
+        else{
+            for(j = 3; j<= x/2; j+=2){
+                if(isPrime(j)==1 && isPrime(x-j)==1){
+                printf("%d %d",j,x-j);
+                break;
+                }
+            }
+        }
+        printf("\n");
+    }
+    return 0;
+}
+样例输入复制
+3
+4
+8
+20
+样例输出复制
+2 2
+3 5
+3 17
